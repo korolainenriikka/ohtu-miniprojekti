@@ -77,12 +77,10 @@ public class DatabaseRecommendationDao implements RecommendationDao {
     @Override
     public List<Recommendation> getAll() {
         ArrayList<Recommendation> recommendations = new ArrayList<>();
-        String sql = "SELECT * FROM recommendations";
         try {
             Connection conn = this.connect();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            
+            ResultSet rs = stmt.executeQuery("SELECT * FROM recommendations");
             while (rs.next()) {  
                 recommendations.add(new Recommendation(rs.getString("author"), 
                         rs.getString("title"), rs.getString("description")));  
