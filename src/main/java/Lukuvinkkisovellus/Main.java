@@ -5,6 +5,10 @@
  */
 package Lukuvinkkisovellus;
 
+import Lukuvinkkisovellus.dao.DatabaseRecommendationDao;
+import Lukuvinkkisovellus.dao.RecommendationDao;
+import Lukuvinkkisovellus.domain.Recommendation;
+
 /**
  *
  * @author timot
@@ -16,6 +20,12 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        RecommendationDao dao = new DatabaseRecommendationDao();
+        dao.createRecommendation("Bob", "Book nr One", "Informative book");
+        for (Recommendation r : dao.getAll()) {
+            System.out.println(r.getAuthor() + 
+                    ", " + r.getTitle() + ": " + r.getDescr());
+        }
     }
     
 }
