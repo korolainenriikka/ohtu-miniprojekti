@@ -10,6 +10,7 @@
 
 * Koodattu
 * Yksikkötestattu
+* Integraatiotestattu
 * Testit on mennyt läpi
 * Katselmoitu
 * Dokumentoitu
