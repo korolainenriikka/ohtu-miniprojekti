@@ -8,6 +8,7 @@ package Lukuvinkkisovellus;
 import Lukuvinkkisovellus.dao.DatabaseRecommendationDao;
 import Lukuvinkkisovellus.dao.RecommendationDao;
 import Lukuvinkkisovellus.domain.Recommendation;
+import Lukuvinkkisovellus.UserInterface;
 
 /**
  *
@@ -26,6 +27,10 @@ public class Main {
             System.out.println(r.getAuthor() + 
                     ", " + r.getTitle() + ": " + r.getDescr());
         }
+        
+        UserInterface UI = new UserInterface();
+        
+        UI.run();
     }
     
 }
