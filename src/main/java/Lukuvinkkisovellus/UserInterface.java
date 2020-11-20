@@ -5,7 +5,10 @@
  */
 package Lukuvinkkisovellus;
 
-import Lukuvinkkisovellus.Recommendation;
+import Lukuvinkkisovellus.dao.DatabaseRecommendationDao;
+import Lukuvinkkisovellus.dao.RecommendationDao;
+import Lukuvinkkisovellus.domain.Recommendation;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,44 +18,57 @@ import java.util.Scanner;
 public class UserInterface {
 
     private Scanner reader;
-    private Recommendation recommendation;
+    private RecommendationDao dbDao;
 
     public UserInterface() {
         this.reader = new Scanner(System.in);
-        this.recommendation = new Recommendation();
+        this.dbDao = new DatabaseRecommendationDao();
     }
 
     public void run() {
-        
-        int input;
-        
         while (true) {
             System.out.println("[1] Add recommendation, [2] List recommendations, [3] Exit");
-            input = reader.nextInt();
-            
-            if(input == 1) add();
-            if(input == 2) list();
-            if(input == 3) break;
-        }                
+            int input = Integer.valueOf(reader.nextLine());
+            if (input == 3) {
+                break;
+            }
+            checkInput(input);
+        }
     }
-    
-    
-    public void add(){
+
+    public void checkInput(int input) {
+        if (input == 1) {
+            add();
+        } else if (input == 2) {
+            list();
+        } else {
+            System.out.println("Unknown command");
+        }
+    }
+
+    public void add() {
         System.out.println("Type the name of the recommendation");
-        String name = reader.next();
-        
+        String name = reader.nextLine();
+
         System.out.println("Type the author of the recommendation");
-        String author = reader.next();
-        
+        String author = reader.nextLine();
+
         System.out.println("Type the description of the recommendation");
-        String description = reader.next();
-        
-        recommendation.add(name, author, description);
-        
+        String description = reader.nextLine();
+
+        dbDao.createRecommendation(name, author, description);
+        System.out.println("");
+
     }
-    
-    public void list(){
-        recommendation.list();
+
+    public void list() {
+        List<Recommendation> list = dbDao.getAll();
+        int i = 1;
+        for (Recommendation r : list) {
+            System.out.println(i++ + ":   " + r.getAuthor()
+                    + ", " + r.getTitle() + ": " + r.getDescr());
+        }
+        System.out.println("");
     }
 
 }

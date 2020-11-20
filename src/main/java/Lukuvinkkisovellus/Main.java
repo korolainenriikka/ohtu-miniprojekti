@@ -20,13 +20,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        RecommendationDao dao = new DatabaseRecommendationDao();
-        dao.createRecommendation("Bob", "Book nr One", "Informative book");
-        for (Recommendation r : dao.getAll()) {
-            System.out.println(r.getAuthor() + 
-                    ", " + r.getTitle() + ": " + r.getDescr());
-        }
+        // TODO code application logic here        
         
         UserInterface UI = new UserInterface();
         
