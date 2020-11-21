@@ -5,6 +5,7 @@
  */
 package RecommendationLibrary;
 
+import Recommendation.io.IO;
 import RecommendationLibrary.dao.DatabaseRecommendationDao;
 import RecommendationLibrary.dao.RecommendationDao;
 import RecommendationLibrary.domain.Recommendation;
@@ -17,18 +18,18 @@ import java.util.Scanner;
  */
 public class UserInterface {
 
-    private Scanner reader;
+    private IO io;
     private RecommendationDao dbDao;
 
-    public UserInterface() {
-        this.reader = new Scanner(System.in);
+    public UserInterface(IO io) {
+        this.io = io;
         this.dbDao = new DatabaseRecommendationDao();
     }
 
     public void run() {
         while (true) {
             System.out.println("[1] Add recommendation, [2] List recommendations, [3] Exit");
-            int input = Integer.valueOf(reader.nextLine());
+            int input = Integer.valueOf(io.nextLine());
             if (input == 3) {
                 break;
             }
@@ -48,13 +49,13 @@ public class UserInterface {
 
     public void add() {
         System.out.println("Type the name of the recommendation");
-        String name = reader.nextLine();
+        String name = io.nextLine();
 
         System.out.println("Type the author of the recommendation");
-        String author = reader.nextLine();
+        String author = io.nextLine();
 
         System.out.println("Type the description of the recommendation");
-        String description = reader.nextLine();
+        String description = io.nextLine();
 
         dbDao.createRecommendation(name, author, description);
         System.out.println("");

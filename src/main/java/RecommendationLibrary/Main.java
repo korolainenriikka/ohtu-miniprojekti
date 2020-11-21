@@ -5,6 +5,7 @@
  */
 package RecommendationLibrary;
 
+import Recommendation.io.KonsoliIO;
 import RecommendationLibrary.dao.DatabaseRecommendationDao;
 import RecommendationLibrary.dao.RecommendationDao;
 import RecommendationLibrary.domain.Recommendation;
@@ -22,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here        
         
-        UserInterface UI = new UserInterface();
+        UserInterface UI = new UserInterface(new KonsoliIO());
         
         UI.run();
     }
