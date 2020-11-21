@@ -7,11 +7,11 @@ plugins {
 }
 
 
-mainClassName = 'Lukuvinkkisovellus.Main'
+mainClassName = 'RecommendationLibrary.Main'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'Lukuvinkkisovellus.Main'
+        attributes 'Main-Class': 'RecommendationLibrary.Main'
     }
 }
 

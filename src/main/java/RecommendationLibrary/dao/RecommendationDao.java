@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lukuvinkkisovellus.dao;
+package RecommendationLibrary.dao;
 
-import Lukuvinkkisovellus.domain.Recommendation;
+import RecommendationLibrary.domain.Recommendation;
 import java.util.List;
 
 /**

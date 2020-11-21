@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lukuvinkkisovellus;
+package RecommendationLibrary;
 
-import Lukuvinkkisovellus.dao.DatabaseRecommendationDao;
-import Lukuvinkkisovellus.dao.RecommendationDao;
-import Lukuvinkkisovellus.domain.Recommendation;
-import Lukuvinkkisovellus.UserInterface;
+import RecommendationLibrary.dao.DatabaseRecommendationDao;
+import RecommendationLibrary.dao.RecommendationDao;
+import RecommendationLibrary.domain.Recommendation;
+import RecommendationLibrary.UserInterface;
 
 /**
  *
