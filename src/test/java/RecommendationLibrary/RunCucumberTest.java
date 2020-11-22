@@ -22,5 +22,5 @@ import org.junit.runner.RunWith;
     tags = "@problem"
 )
 
- public class RunCucumberTest {   
+public class RunCucumberTest {   
 }

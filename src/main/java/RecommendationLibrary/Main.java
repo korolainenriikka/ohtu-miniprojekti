@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here        
         
-        UserInterface UI = new UserInterface(new KonsoliIO());
+        UserInterface UI = new UserInterface(new KonsoliIO(), new DatabaseRecommendationDao());
         
         UI.run();
     }

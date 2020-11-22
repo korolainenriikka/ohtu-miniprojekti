@@ -5,6 +5,7 @@
  */
 package RecommendationLibrary;
 
+import Recommendation.io.StubIO;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -20,27 +21,37 @@ import RecommendationLibrary.dao.*;
  */
 public class Stepdefs {
     
-    Main main;
     List<String> inputLines;
+    StubIO io;
+    UserInterface ui;
+    RecommendationDao dao;
     
     @Before
     public void setup(){
-          
+        this.inputLines = new ArrayList<String>();
+    }
+
+    @Given("^command add is selected")
+    public void commandAddSelected() {
+        inputLines.add("1");
     }
     
-    @Given("^command add is selected$")
-    public void commandAddSelected() throws Throwable {
-        inputLines.add("1"); // 1 = add
-    }
-    
-    @When("author {string}, title {string} and rescription {string} is added")
-    public void newRecommendationIsAdded(String author, String title, String rescription){
+    @When("author {string}, title {string} and description {string} are entered")
+    public void newRecommendationIsAdded(String author, String title, String description){
+        inputLines.add(author);
+        inputLines.add(title);
+        inputLines.add(description);
+        inputLines.add("3");
+        io = new StubIO(inputLines);
+        dao = new InMemoryRecommendationDao();
+        ui = new UserInterface(io, dao);
+        ui.run();
         
     }
     
     @Then("system will respond with {string}")
     public void systemWillRespondWith(String expectedOutput) {
-        //assertTrue(.contains(expectedOutput));
+        io.getPrints().contains(expectedOutput);
     }
     
 }

@@ -13,37 +13,30 @@ import java.util.List;
  * @author jenni.makinen
  */
 
-//HUOM: t‰m‰ on suoraan jostain laskareista, eli pit‰‰ mukauttaa t‰lle appille!!!
-//toisin sanoen TODO:
-
-public class StubIO {
+public class StubIO implements IO{
     private List<String> lines;
     private int i;
-    private ArrayList<String> prints;
+    private List<String> prints;
 
     public StubIO(List<String> values) {
         this.lines = values;
-        prints = new ArrayList<>();
+        this.prints = new ArrayList<>();
     }
 
-    public void print(String toPrint) {
-        prints.add(toPrint);
-    }
-
-    public int readInt(String prompt) {
-        print(prompt);
-        return Integer.parseInt(lines.get(i++));
-    }
-
-    public ArrayList<String> getPrints() {
+    public List<String> getPrints() {
         return prints;
     }
-
-    public String readLine(String prompt) {
-        print(prompt);
+    
+    @Override
+    public String nextLine() {
         if (i < lines.size()) {
             return lines.get(i++);
         }
         return "";
+    }
+
+    @Override
+    public void print(String string) {
+        this.prints.add(string);
     }
 }

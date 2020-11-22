@@ -6,11 +6,9 @@
 package RecommendationLibrary;
 
 import Recommendation.io.IO;
-import RecommendationLibrary.dao.DatabaseRecommendationDao;
 import RecommendationLibrary.dao.RecommendationDao;
 import RecommendationLibrary.domain.Recommendation;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -21,14 +19,14 @@ public class UserInterface {
     private IO io;
     private RecommendationDao dbDao;
 
-    public UserInterface(IO io) {
+    public UserInterface(IO io, RecommendationDao dao) {
         this.io = io;
-        this.dbDao = new DatabaseRecommendationDao();
+        this.dbDao = dao;
     }
 
     public void run() {
         while (true) {
-            System.out.println("[1] Add recommendation, [2] List recommendations, [3] Exit");
+            this.io.print("[1] Add recommendation, [2] List recommendations, [3] Exit");
             int input = Integer.valueOf(io.nextLine());
             if (input == 3) {
                 break;
@@ -43,33 +41,31 @@ public class UserInterface {
         } else if (input == 2) {
             list();
         } else {
-            System.out.println("Unknown command");
+            this.io.print("Unknown command");
         }
     }
 
     public void add() {
-        System.out.println("Type the name of the recommendation");
+        this.io.print("Type the name of the recommendation");
         String name = io.nextLine();
 
-        System.out.println("Type the author of the recommendation");
+        this.io.print("Type the author of the recommendation");
         String author = io.nextLine();
 
-        System.out.println("Type the description of the recommendation");
+        this.io.print("Type the description of the recommendation");
         String description = io.nextLine();
 
         dbDao.createRecommendation(name, author, description);
-        System.out.println("");
-
+        this.io.print("Recommendation added");
     }
 
     public void list() {
         List<Recommendation> list = dbDao.getAll();
         int i = 1;
         for (Recommendation r : list) {
-            System.out.println(i++ + ":   " + r.getAuthor()
+            this.io.print(i++ + ":   " + r.getAuthor()
                     + ", " + r.getTitle() + ": " + r.getDescr());
         }
-        System.out.println("");
     }
 
 }
