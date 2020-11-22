@@ -24,6 +24,7 @@ jobs:
       run: chmod +x gradlew
     - name: Test with Gradle
       run: ./gradlew test
-    - name: Run checkstyle
+    - name: Run checkstyleMain
       run: ./gradlew checkstyleMain
+    - name: Run checkstyleTest
       run: ./gradlew checkstyleTest
