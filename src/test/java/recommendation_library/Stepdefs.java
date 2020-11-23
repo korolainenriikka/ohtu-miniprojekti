@@ -8,7 +8,7 @@ package recommendation_library;
 import recommendation_library.dao.InMemoryRecommendationDao;
 import recommendation_library.dao.RecommendationDao;
 import recommendation_library.UserInterface;
-import recommendation.io.StubIO;
+import recommendation_library.io.StubIO;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;

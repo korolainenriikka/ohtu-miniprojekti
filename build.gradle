@@ -7,7 +7,7 @@ plugins {
 }
 
 
-mainClassName = 'RecommendationLibrary.Main'
+mainClassName = 'recommendation_library.Main'
 
 jar {
     manifest {
@@ -36,4 +36,17 @@ dependencies {
 
 run {
     standardInput = System.in
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+    afterEvaluate {
+        getClassDirectories().setFrom(classDirectories.files.collect {
+                fileTree(dir: it,
+                    exclude: ['**/Main**'])
+        })
+    }
 }

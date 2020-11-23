@@ -5,7 +5,7 @@
  */
 package recommendation_library;
 
-import recommendation.io.IO;
+import recommendation_library.io.IO;
 import recommendation_library.dao.RecommendationDao;
 import recommendation_library.domain.Recommendation;
 import java.util.List;
