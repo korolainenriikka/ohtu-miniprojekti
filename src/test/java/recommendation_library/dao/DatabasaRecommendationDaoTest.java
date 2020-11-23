@@ -12,10 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import recommendation.io.IO;
-import recommendation.io.KonsoliIO;
 import recommendation_library.UserInterface;
 import recommendation_library.domain.Recommendation;
+import recommendation_library.io.IO;
+import recommendation_library.io.KonsoliIO;
 
 /**
  *
