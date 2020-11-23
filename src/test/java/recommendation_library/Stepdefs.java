@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RecommendationLibrary;
+package recommendation_library;
 
-import Recommendation.io.StubIO;
+import recommendation_library.dao.InMemoryRecommendationDao;
+import recommendation_library.dao.RecommendationDao;
+import recommendation_library.UserInterface;
+import recommendation.io.StubIO;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -13,7 +16,6 @@ import io.cucumber.java.en.Then;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
-import RecommendationLibrary.dao.*;
 
 /**
  *

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RecommendationLibrary;
+package recommendation_library;
 
-import Recommendation.io.KonsoliIO;
-import RecommendationLibrary.dao.DatabaseRecommendationDao;
-import RecommendationLibrary.dao.RecommendationDao;
-import RecommendationLibrary.domain.Recommendation;
-import RecommendationLibrary.UserInterface;
+import recommendation.io.KonsoliIO;
+import recommendation_library.dao.DatabaseRecommendationDao;
+import recommendation_library.dao.RecommendationDao;
+import recommendation_library.domain.Recommendation;
+import recommendation_library.UserInterface;
 
 /**
  *

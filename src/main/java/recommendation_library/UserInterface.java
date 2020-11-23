@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RecommendationLibrary;
+package recommendation_library;
 
-import Recommendation.io.IO;
-import RecommendationLibrary.dao.RecommendationDao;
-import RecommendationLibrary.domain.Recommendation;
+import recommendation.io.IO;
+import recommendation_library.dao.RecommendationDao;
+import recommendation_library.domain.Recommendation;
 import java.util.List;
 
 /**

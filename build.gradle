@@ -11,7 +11,7 @@ mainClassName = 'RecommendationLibrary.Main'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'RecommendationLibrary.Main'
+        attributes 'Main-Class': 'recommendation_library.Main'
     }
 }
 

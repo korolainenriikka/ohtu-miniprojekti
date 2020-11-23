@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Recommendation.io;
+package recommendation_library.domain;
 
 /**
  *
  * @author jenni.makinen
  */
-public interface IO {
-    String nextLine();
-    void print(String string);
+public class RecommendationTest {
+    
 }

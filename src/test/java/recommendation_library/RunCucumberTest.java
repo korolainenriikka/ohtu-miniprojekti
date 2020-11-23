@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RecommendationLibrary;
+package recommendation_library;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Recommendation.io;
+package recommendation.io;
 
 import java.util.Scanner;
 
