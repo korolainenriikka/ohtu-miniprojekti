@@ -16,10 +16,11 @@ import java.util.List;
  */
 public class DatabaseRecommendationDao implements RecommendationDao {
 
-    private String fileName = "recommendations.db";
+    private String fileName;
 
 
-    public DatabaseRecommendationDao() {
+    public DatabaseRecommendationDao(String filename) {
+        this.fileName = filename;
         connect();
         createTable();
     }
