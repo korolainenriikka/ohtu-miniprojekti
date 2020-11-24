@@ -38,34 +38,30 @@ public class Stepdefs {
         inputLines.add("1");
     }
     
-    @When("title {string} is entered")
-    public void titleIsAdded(String title) {
-        
-    }
-    
-    @When("author {string} is entered")
-    public void authorIsAdded(String author) {
-        
-    }
-    
-    @When("description {string} is entered")
-    public void descriptionIsAdded(String description) {
-        
-    }
-    
-    @When("author {string}, title {string} and description {string} are entered")
-    public void newRecommendationIsAdded(String author, String title, String description){
-        inputLines.add(author);
-        inputLines.add(title);
-        inputLines.add(description);
+    @When("^command exit is entered")
+    public void commandExitSelected() {
         inputLines.add("3");
         io = new StubIO(inputLines);
         dao = new InMemoryRecommendationDao();
         ui = new UserInterface(io, dao);
         ui.run();
-        
     }
     
+    @When("title {string} is entered")
+    public void titleIsAdded(String title) {
+        inputLines.add(title);
+    }
+    
+    @When("author {string} is entered")
+    public void authorIsAdded(String author) {
+        inputLines.add(author);
+    }
+    
+    @When("description {string} is entered")
+    public void descriptionIsAdded(String description) {
+        inputLines.add(description);
+    }
+
     @Then("system will respond with {string}")
     public void systemWillRespondWith(String expectedOutput) {
         io.getPrints().contains(expectedOutput);
