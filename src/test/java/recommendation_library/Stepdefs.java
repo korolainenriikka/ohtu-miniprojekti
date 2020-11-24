@@ -38,6 +38,9 @@ public class Stepdefs {
         inputLines.add("1");
     }
     
+    @Given("^command list is selected")
+    public void commandEditSelected() { inputLines.add("2"); }
+    
     @When("^command exit is entered")
     public void commandExitSelected() {
         inputLines.add("3");
