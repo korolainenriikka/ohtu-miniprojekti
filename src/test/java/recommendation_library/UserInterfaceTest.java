@@ -33,7 +33,6 @@ public class UserInterfaceTest {
         UI.checkInput(1);
         
         verify(UI, times(1)).checkInput(1);
-        verify(UI, times(1)).add();
     }
     
 }
