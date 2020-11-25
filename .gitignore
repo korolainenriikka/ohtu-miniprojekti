@@ -2,7 +2,7 @@
 build/
 .idea
 *.db
-
+nbproject
 
 # Ignore Gradle GUI config
 gradle-app.setting
