@@ -18,25 +18,28 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import recommendation_library.dao.RecommendationDao;
 import recommendation_library.io.IO;
 
 public class UserInterfaceTest {
     
     UserInterface UI;
     IO input;
+    RecommendationDao Dao;
     
     @Before
     public void setUp(){
-        UI = mock(UserInterface.class);
         input = mock(IO.class);
+        Dao = mock(RecommendationDao.class);
+        UI = new UserInterface(input, Dao);
     }
     
     @Test
     public void checkInputCallsAdd(){
         UI.checkInput(1);
         
-        
         verify(UI, times(1)).checkInput(1);
+        
     }
     
 }
