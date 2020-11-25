@@ -28,4 +28,12 @@ public class UserInterfaceTest {
         UI = mock(UserInterface.class);
     }
     
+    @Test
+    public void checkInputCallsAdd(){
+        UI.checkInput(1);
+        
+        verify(UI, times(1)).checkInput(1);
+        
+    }
+    
 }
