@@ -49,4 +49,11 @@ public class UserInterfaceTest {
         
     }
     
+    @Test
+    public void checkInputUnknownCommand() {
+        UI.checkInput(4);
+        
+        verify(input, times(1)).print("Unknown command");
+    }
+    
 }
