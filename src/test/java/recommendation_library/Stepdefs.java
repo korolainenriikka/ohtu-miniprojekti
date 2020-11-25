@@ -17,6 +17,7 @@ import io.cucumber.java.en.Then;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
+import recommendation_library.domain.Recommendation;
 
 /**
  *
@@ -39,8 +40,18 @@ public class Stepdefs {
         inputLines.add("1");
     }
     
-    @Given("^command list is selected")
-    public void commandEditSelected() { inputLines.add("2"); }
+    @Given("recommendation with author {string}, title {string}, and description {string} is added")
+    public void addTestRecommendation(String author, String title, String description) {
+        inputLines.add("1");
+        inputLines.add(author);
+        inputLines.add(title);
+        inputLines.add(description);
+    }
+    
+    @When("^command list is selected")
+    public void commandEditSelected() {
+        inputLines.add("2");
+    }
     
     @When("library is given entries")
     public void testEntriesEntered() {
@@ -83,10 +94,19 @@ public class Stepdefs {
         io.getPrints().contains(expectedOutput);
     }
     
+<<<<<<< HEAD
     @Then("app will list all recommendations")
     public void listRecommendations() {
         
     }
     
     
+=======
+    @Then("app lists a recommendation with author {string}, title {string}, and description {string}")
+    public void listingAddedRecommendation(String author, String title, String description) {
+        io.getPrints().contains("1" + ":   " + author
+                    + ", " + title + ": " + description);
+    }
+    
+>>>>>>> 2a379a9a0b3e31f9a77b241d757ef668054d4612
 }
