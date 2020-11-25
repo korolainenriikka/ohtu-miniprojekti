@@ -1,5 +1,6 @@
 Feature: As a user I want to be able to add a new recommendation
 
+	@problem
     Scenario: user can add a new recommendation with author, title and description
         Given command add is selected
         When author "AuthorTest" is entered
