@@ -38,7 +38,10 @@ public class UserInterfaceTest {
     
     @Test
     public void checkInputCallsAdd(){
+        when(input.nextLine()).thenReturn("Test");
+        
         UI.checkInput(1);
+        
         
         verify(input, times(3)).nextLine();
         verify(Dao, times(1)).createRecommendation(anyString(), anyString(), anyString());
