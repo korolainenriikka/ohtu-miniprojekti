@@ -11,6 +11,8 @@ import recommendation_library.dao.RecommendationDao;
 import recommendation_library.domain.Recommendation;
 import recommendation_library.UserInterface;
 
+import java.util.Scanner;
+
 /**
  *
  * @author timot
@@ -23,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here        
         
-        UserInterface UI = new UserInterface(new KonsoliIO(), new DatabaseRecommendationDao("recommendations.db"));
+        UserInterface UI = new UserInterface(new KonsoliIO(new Scanner(System.in)), new DatabaseRecommendationDao("recommendations.db"));
         
         UI.run();
     }

@@ -5,6 +5,7 @@
  */
 package recommendation_library.io;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -13,8 +14,12 @@ import java.util.Scanner;
  */
 public class KonsoliIO implements IO{
 
-    private Scanner reader = new Scanner(System.in);
+    private Scanner reader;
      
+    public KonsoliIO(Scanner scanner) {
+        reader = scanner;    
+    }
+    
     @Override
     public String nextLine() {
         return reader.nextLine();

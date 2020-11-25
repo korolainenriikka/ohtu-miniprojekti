@@ -6,7 +6,6 @@
 package recommendation_library;
 
 /**
- *
  * @author jhku
  */
 
@@ -20,40 +19,44 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import recommendation_library.dao.RecommendationDao;
 import recommendation_library.io.IO;
 
 public class UserInterfaceTest {
-    
+
     UserInterface UI;
     IO input;
     RecommendationDao Dao;
-    
+
     @Before
-    public void setUp(){
+    public void setUp() {
         input = mock(IO.class);
         Dao = mock(RecommendationDao.class);
         UI = new UserInterface(input, Dao);
     }
-    
+
     @Test
-    public void checkInputCallsAdd(){
-        when(input.nextLine()).thenReturn("Test");
-        
+    public void checkInputCallsAdd() {
+        when(input.nextLine())
+            .thenReturn("Jane")
+            .thenReturn("Hobitti")
+            .thenReturn("Sci-fi thriller");
+
         UI.checkInput(1);
-        
-        
+
+
         verify(input, times(3)).nextLine();
-        verify(Dao, times(1)).createRecommendation(anyString(), anyString(), anyString());
+        verify(Dao, times(1)).createRecommendation("Jane", "Hobitti", "Sci-fi thriller");
         verify(input, times(4)).print(anyString());
-        
+
     }
-    
+
     @Test
     public void checkInputUnknownCommand() {
         UI.checkInput(4);
-        
+
         verify(input, times(1)).print("Unknown command");
     }
-    
+
 }
