@@ -5,6 +5,7 @@
  */
 package recommendation_library;
 
+import org.junit.Test;
 import recommendation_library.dao.InMemoryRecommendationDao;
 import recommendation_library.dao.RecommendationDao;
 import recommendation_library.UserInterface;
@@ -52,6 +53,18 @@ public class Stepdefs {
         inputLines.add("2");
     }
     
+    @When("library is given entries")
+    public void testEntriesEntered() {
+        commandAddSelected();
+        authorIsAdded("Jane");
+        titleIsAdded("Mystery");
+        descriptionIsAdded("A love space opera");
+        
+        authorIsAdded("Mike");
+        titleIsAdded("Life, and what it could be");
+        descriptionIsAdded("A philosophical thriller");       
+    }
+    
     @When("^command exit is entered")
     public void commandExitSelected() {
         inputLines.add("3");
@@ -80,6 +93,12 @@ public class Stepdefs {
     public void systemWillRespondWith(String expectedOutput) {
         io.getPrints().contains(expectedOutput);
     }
+    
+    @Then("app will list all recommendations")
+    public void listRecommendations() {
+        
+    }
+    
     
     @Then("app lists a recommendation with author {string}, title {string}, and description {string}")
     public void listingAddedRecommendation(String author, String title, String description) {
