@@ -94,19 +94,16 @@ public class Stepdefs {
         io.getPrints().contains(expectedOutput);
     }
     
-<<<<<<< HEAD
     @Then("app will list all recommendations")
     public void listRecommendations() {
         
     }
     
     
-=======
     @Then("app lists a recommendation with author {string}, title {string}, and description {string}")
     public void listingAddedRecommendation(String author, String title, String description) {
         io.getPrints().contains("1" + ":   " + author
                     + ", " + title + ": " + description);
     }
     
->>>>>>> 2a379a9a0b3e31f9a77b241d757ef668054d4612
 }
