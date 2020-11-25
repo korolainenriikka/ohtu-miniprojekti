@@ -32,8 +32,8 @@ public class DatabasaRecommendationDaoTest {
 
     @Before
     public void setUp() {
-        db_dao = new DatabaseRecommendationDao("test.db");
-        io = mock(KonsoliIO.class);
+        db_dao = new DatabaseRecommendationDao("src/test/resources/test.db");
+        io = mock(IO.class);
         ui = new UserInterface(io, db_dao);
     }
 
