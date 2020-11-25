@@ -12,6 +12,8 @@ package recommendation_library;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -39,7 +41,8 @@ public class UserInterfaceTest {
         UI.checkInput(1);
         
         verify(input, times(3)).nextLine();
-        verify(Dao, times(1)).createRecommendation(author, title, descr);
+        verify(Dao, times(1)).createRecommendation(anyString(), anyString(), anyString());
+        verify(input, times(4)).print(anyString());
         
     }
     
