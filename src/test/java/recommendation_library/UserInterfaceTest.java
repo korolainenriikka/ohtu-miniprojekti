@@ -64,5 +64,13 @@ public class UserInterfaceTest {
 
         verify(input, times(1)).print("Unknown command");
     }
+    
+    @Test
+    public void checkInputCallsList() {
+        UI.checkInput(2);
+
+        verify(test_dao, times(1)).getAllBookRecommendations();
+
+    }
 
 }

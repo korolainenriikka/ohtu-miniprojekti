@@ -51,7 +51,7 @@ public class Stepdefs {
     }
     
     @When("^command list is selected")
-    public void commandEditSelected() {
+    public void commandListSelected() {
         inputLines.add("2");
     }
 

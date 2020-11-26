@@ -11,6 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import recommendation_library.UserInterface;
+import recommendation_library.domain.BookRecommendation;
 import recommendation_library.domain.DatabaseService;
 import recommendation_library.io.IO;
 
@@ -52,6 +53,14 @@ public class DatabasaRecommendationDaoTest {
         ui.addBook();
         verify(io, times(5)).nextLine();
         assertFalse(service.getAllBookRecommendations().isEmpty());
+        
+        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(0);
+        assertEquals("Jane", addedRecommendation.getAuthor());
+        assertEquals("Hobitti", addedRecommendation.getTitle());
+        assertEquals("Sci-fi thriller", addedRecommendation.getDescription());
+        assertEquals("1234-ABCD", addedRecommendation.getIsbn());
+        assertEquals(10, addedRecommendation.getPageCount());
+        assertEquals(addedRecommendation.getAddDate(), java.time.LocalDate.now().toString());
     }
 
 }

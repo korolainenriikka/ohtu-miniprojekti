@@ -18,8 +18,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     plugin = "pretty", 
     features = "src/test/resources/RecommendationLibrary", 
-    snippets = CucumberOptions.SnippetType.CAMELCASE,
-    tags = "@problem"
+    snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 
 public class RunCucumberTest {   
