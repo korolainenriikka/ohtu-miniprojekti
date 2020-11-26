@@ -34,4 +34,6 @@ public class KonsoliIO implements IO{
         System.out.println(string);
     }
     
+    
+    
 }

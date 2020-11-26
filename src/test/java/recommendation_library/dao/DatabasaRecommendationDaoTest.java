@@ -13,7 +13,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import recommendation_library.UserInterface;
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 import recommendation_library.io.IO;
 import recommendation_library.io.KonsoliIO;
 
@@ -44,13 +44,15 @@ public class DatabasaRecommendationDaoTest {
     @Test
     public void createRecommendationAddsToTheDatabase() {
         when(io.nextLine())
-                .thenReturn("bob")
-                .thenReturn("book")
-                .thenReturn("readable");
+            .thenReturn("Jane")
+            .thenReturn("Hobitti")
+            .thenReturn("Book")
+            .thenReturn("Sci-fi thriller")
+            .thenReturn("1234-ABCD");
                 
-        ui.add();
-        verify(io, times(3)).nextLine();
-        assertFalse(db_dao.getAll().isEmpty());
+        ui.addBook();
+        verify(io, times(5)).nextLine();
+        assertFalse(db_dao.getAllBookRecommendations().isEmpty());
     }
 
 }

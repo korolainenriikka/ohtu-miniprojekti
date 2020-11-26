@@ -9,6 +9,6 @@ package recommendation_library.domain;
  *
  * @author jenni.makinen
  */
-public class RecommendationTest {
+public class BookRecommendationTest {
     
 }

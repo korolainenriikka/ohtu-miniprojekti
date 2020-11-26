@@ -7,7 +7,7 @@ package recommendation_library;
 
 import recommendation_library.io.IO;
 import recommendation_library.dao.RecommendationDao;
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 import java.util.List;
 
 /**
@@ -44,7 +44,7 @@ public class UserInterface {
      */
     public void checkInput(int input) {
         if (input == 1) {
-            add();
+            addBook();
         } else if (input == 2) {
             list();
         } else {
@@ -53,31 +53,38 @@ public class UserInterface {
     }
 
     /**
-     * add a recommendation to the library
+     * add a book recommendation to the library
      */
-    public void add() {
-        this.io.print("Type the name of the recommendation");
-        String name = io.nextLine();
-
+    public void addBook() {
+        
         this.io.print("Type the author of the recommendation");
         String author = io.nextLine();
+        
+        this.io.print("Type the title of the recommendation");
+        String title = io.nextLine();
+
+        this.io.print("Type the type of the recommendation");
+        String type = io.nextLine();
 
         this.io.print("Type the description of the recommendation");
         String description = io.nextLine();
+        
+        this.io.print("Type the ISBN of the recommendation");
+        String isbn = io.nextLine();
 
-        dbDao.createRecommendation(name, author, description);
+        dbDao.createBookRecommendation(author, title, type, description, isbn);
         this.io.print("Recommendation added");
     }
 
     /**
-     * list all recommendations contained within the library
+     * list all book recommendations contained within the library
      */
     public void list() {
-        List<Recommendation> list = dbDao.getAll();
+        List<BookRecommendation> list = dbDao.getAllBookRecommendations();
         int i = 1;
-        for (Recommendation r : list) {
+        for (BookRecommendation r : list) {
             this.io.print(i++ + ":   " + r.getAuthor()
-                    + ", " + r.getTitle() + ": " + r.getDescr());
+                    + ", " + r.getTitle() + ": " + r.getDescription());
         }
     }
 

@@ -5,7 +5,7 @@
  */
 package recommendation_library.dao;
 
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,48 +58,58 @@ public class DatabaseRecommendationDao implements RecommendationDao {
         }
     }
 
-    /**
-     * Insert a new recommendation into the database
-     * @param author
-     * @param title
-     * @param descr
-     */
-    @Override
-    public void createRecommendation(String author, String title, String descr) {
-        String sql = "INSERT INTO recommendations(author, title, description) "
-                + "VALUES(?,?,?)";
+//    /**
+//     * Insert a new recommendation into the database
+//     * @param author
+//     * @param title
+//     * @param descr
+//     */
+//    @Override
+//    public void createRecommendation(String author, String title, String descr) {
+//        String sql = "INSERT INTO recommendations(author, title, description) "
+//                + "VALUES(?,?,?)";
+//
+//        try {
+//            Connection conn = this.connect();
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.setString(1, author);
+//            pstmt.setString(2, title);
+//            pstmt.setString(3, descr);
+//            pstmt.executeUpdate();
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    /**
+//     * Fetch every recommendation from attached database
+//     * @return List of recommendations
+//     */
+//    @Override
+//    public List<BookRecommendation> getAll() {
+//        ArrayList<BookRecommendation> recommendations = new ArrayList<>();
+//        try {
+//            Connection conn = this.connect();
+//            Statement stmt = conn.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM recommendations");
+//            while (rs.next()) {  
+//                recommendations.add(new BookRecommendation(rs.getString("author"), 
+//                        rs.getString("title"), rs.getString("description")));  
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return recommendations;
+//    }
 
-        try {
-            Connection conn = this.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, author);
-            pstmt.setString(2, title);
-            pstmt.setString(3, descr);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    @Override
+    public void createBookRecommendation(String author, String title, String type, String description, String isbn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * Fetch every recommendation from attached database
-     * @return List of recommendations
-     */
     @Override
-    public List<Recommendation> getAll() {
-        ArrayList<Recommendation> recommendations = new ArrayList<>();
-        try {
-            Connection conn = this.connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM recommendations");
-            while (rs.next()) {  
-                recommendations.add(new Recommendation(rs.getString("author"), 
-                        rs.getString("title"), rs.getString("description")));  
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return recommendations;
+    public List<BookRecommendation> getAllBookRecommendations() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

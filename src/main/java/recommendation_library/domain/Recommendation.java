@@ -5,31 +5,58 @@
  */
 package recommendation_library.domain;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  *
- * @author anadis
+ * @author timot
  */
 public class Recommendation {
+    protected String title;
+    protected String type;
+    protected String description;
+    protected String addDate;
     
-    String author;
-    String title;
-    String description;
-    
-    public Recommendation(String author, String title, String descr) {
-        this.author = author;
+    public Recommendation(String title, String type, String description, String addDate) {
         this.title = title;
-        this.description = descr;        
+        this.type = type;
+        this.description = description;
+        this.addDate = addDate;
     }
-    
-    public String getAuthor() {
-        return this.author;
-    }
-    
+
     public String getTitle() {
-        return this.title;
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(String addDate) {
+        this.addDate = addDate;
     }
     
-    public String getDescr() {
-        return this.description;
-    }
+    
+    
 }

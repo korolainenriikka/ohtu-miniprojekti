@@ -17,7 +17,7 @@ import io.cucumber.java.en.Then;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 
 /**
  *

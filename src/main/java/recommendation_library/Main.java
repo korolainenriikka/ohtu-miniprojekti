@@ -8,7 +8,7 @@ package recommendation_library;
 import recommendation_library.io.KonsoliIO;
 import recommendation_library.dao.DatabaseRecommendationDao;
 import recommendation_library.dao.RecommendationDao;
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 import recommendation_library.UserInterface;
 
 import java.util.Scanner;

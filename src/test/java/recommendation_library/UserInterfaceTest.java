@@ -41,13 +41,15 @@ public class UserInterfaceTest {
         when(input.nextLine())
             .thenReturn("Jane")
             .thenReturn("Hobitti")
-            .thenReturn("Sci-fi thriller");
+            .thenReturn("Book")
+            .thenReturn("Sci-fi thriller")
+            .thenReturn("1234-ABCD");
 
         UI.checkInput(1);
 
 
-        verify(input, times(3)).nextLine();
-        verify(Dao, times(1)).createRecommendation("Jane", "Hobitti", "Sci-fi thriller");
+        verify(input, times(5)).nextLine();
+        verify(Dao, times(1)).createBookRecommendation("Jane", "Hobitti", "Book", "Sci-fi thriller", "1234-ABCD");
         verify(input, times(4)).print(anyString());
 
     }

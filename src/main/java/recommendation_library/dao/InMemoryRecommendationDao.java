@@ -5,8 +5,9 @@
  */
 package recommendation_library.dao;
 
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,21 +17,22 @@ import java.util.List;
 
 
 public class InMemoryRecommendationDao implements RecommendationDao {
-    private List<Recommendation> recommendations;
+    private List<BookRecommendation> bookRecommendations;
     
 
     public InMemoryRecommendationDao() {
-        this.recommendations = new ArrayList<>();
+        this.bookRecommendations = new ArrayList<>();
     }
 
     @Override
-    public void createRecommendation(String author, String title, String descr) {
-        this.recommendations.add(new Recommendation(author, title, descr));
+    public void createBookRecommendation(String author, String title, String type, String description, String isbn) {
+        String addDate = java.time.LocalDate.now().toString();
+        this.bookRecommendations.add(new BookRecommendation(author, title, type, description, isbn, addDate));
     }
 
     @Override
-    public List<Recommendation> getAll() {
-        return this.recommendations;
+    public List<BookRecommendation> getAllBookRecommendations() {
+        return this.bookRecommendations;
     }
 
 }

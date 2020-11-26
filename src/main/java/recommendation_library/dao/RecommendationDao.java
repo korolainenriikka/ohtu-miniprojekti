@@ -5,7 +5,7 @@
  */
 package recommendation_library.dao;
 
-import recommendation_library.domain.Recommendation;
+import recommendation_library.domain.BookRecommendation;
 import java.util.List;
 
 /**
@@ -13,6 +13,6 @@ import java.util.List;
  * @author anadis
  */
 public interface RecommendationDao {
-    void createRecommendation(String author, String title, String descr);
-    List<Recommendation> getAll();
+    void createBookRecommendation(String author, String title, String type, String description, String isbn);
+    List<BookRecommendation> getAllBookRecommendations();
 }
