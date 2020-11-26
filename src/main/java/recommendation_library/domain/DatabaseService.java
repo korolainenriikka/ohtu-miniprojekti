@@ -41,4 +41,8 @@ public class DatabaseService {
         List<BookRecommendation> books = dao.getAllBookRecommendations();
         return books;
     }
+    
+    public void editBookRecommendation(String title, String fieldToChange, String newValue) {
+        this.dao.editBookRecommendation(title, fieldToChange, newValue);
+    }
 }

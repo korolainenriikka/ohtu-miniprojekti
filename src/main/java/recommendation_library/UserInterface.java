@@ -37,6 +37,11 @@ public class UserInterface {
             }
             checkInput(input);
         }
+        // Personal test of service.editBookRecommendation method
+        service.addBook("Bob", "name", "good", "12345");
+        list();
+        service.editBookRecommendation("name", "title", "a better title");
+        list();
     }
 
     /**

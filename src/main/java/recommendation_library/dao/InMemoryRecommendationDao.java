@@ -36,6 +36,11 @@ public class InMemoryRecommendationDao implements RecommendationDao {
         return this.bookRecommendations;
     }
 
+    @Override
+    public void editBookRecommendation(String title, String fieldToBeEdited, String newValue) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 }

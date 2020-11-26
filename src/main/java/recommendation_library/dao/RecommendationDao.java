@@ -16,4 +16,5 @@ import recommendation_library.domain.Type;
 public interface RecommendationDao {
     void createBookRecommendation(String author, String title, String description, String isbn);
     List<BookRecommendation> getAllBookRecommendations();
+    void editBookRecommendation(String title, String fieldToBeEdited, String newValue);
 }

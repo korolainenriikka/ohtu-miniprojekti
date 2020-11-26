@@ -109,5 +109,22 @@ public class DatabaseRecommendationDao implements RecommendationDao {
         }
         return books;
     }
+    
+    @Override
+    public void editBookRecommendation(String title, String fieldToBeEdited, String newValue) {
+        String sql = "UPDATE books SET " + fieldToBeEdited + " = ? WHERE title = ?" ;
+        // make sql query;
+          try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, newValue);
+            pstmt.setString(2, title);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
