@@ -24,6 +24,9 @@ public class UserInterface {
         this.dbDao = dao;
     }
 
+    /**
+     * launch the application
+     */
     public void run() {
         while (true) {
             this.io.print("[1] Add recommendation, [2] List recommendations, [3] Exit");
@@ -35,6 +38,10 @@ public class UserInterface {
         }
     }
 
+    /**
+     * 
+     * @param input number given from user. 1 for "add", 2 for "list", 3 for "exit"
+     */
     public void checkInput(int input) {
         if (input == 1) {
             add();
@@ -45,6 +52,9 @@ public class UserInterface {
         }
     }
 
+    /**
+     * add a recommendation to the library
+     */
     public void add() {
         this.io.print("Type the name of the recommendation");
         String name = io.nextLine();
@@ -59,6 +69,9 @@ public class UserInterface {
         this.io.print("Recommendation added");
     }
 
+    /**
+     * list all recommendations contained within the library
+     */
     public void list() {
         List<Recommendation> list = dbDao.getAll();
         int i = 1;

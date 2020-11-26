@@ -5,7 +5,6 @@
  */
 package recommendation_library.io;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,12 @@ import java.util.Scanner;
 public class KonsoliIO implements IO{
 
     private Scanner reader;
-     
+
+    /**
+     * 
+     * example: KonsoliIO io = new KonsoliIO(System.in);
+     * @param scanner a scanner from where input can be read.
+     */
     public KonsoliIO(Scanner scanner) {
         reader = scanner;    
     }

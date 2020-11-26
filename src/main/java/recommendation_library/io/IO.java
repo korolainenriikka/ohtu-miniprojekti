@@ -11,5 +11,10 @@ package recommendation_library.io;
  */
 public interface IO {
     String nextLine();
+
+    /**
+     * 
+     * @param string a string that is to be printed
+     */
     void print(String string);
 }

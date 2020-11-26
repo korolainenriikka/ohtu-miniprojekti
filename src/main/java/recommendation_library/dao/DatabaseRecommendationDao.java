@@ -58,6 +58,12 @@ public class DatabaseRecommendationDao implements RecommendationDao {
         }
     }
 
+    /**
+     * Insert a new recommendation into the database
+     * @param author
+     * @param title
+     * @param descr
+     */
     @Override
     public void createRecommendation(String author, String title, String descr) {
         String sql = "INSERT INTO recommendations(author, title, description) "
@@ -75,6 +81,10 @@ public class DatabaseRecommendationDao implements RecommendationDao {
         }
     }
 
+    /**
+     * Fetch every recommendation from attached database
+     * @return List of recommendations
+     */
     @Override
     public List<Recommendation> getAll() {
         ArrayList<Recommendation> recommendations = new ArrayList<>();
