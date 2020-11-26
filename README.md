@@ -1,4 +1,5 @@
 ![Github Actions](https://github.com/HoolaBoola/ohtu-miniprojekti/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![codecov](https://codecov.io/gh/HoolaBoola/ohtu-miniprojekti/branch/main/graph/badge.svg?token=OkQ6MbteWP)](https://codecov.io/gh/HoolaBoola/ohtu-miniprojekti)
 
 # Projekti
 
