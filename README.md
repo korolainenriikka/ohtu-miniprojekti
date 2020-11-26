@@ -1,3 +1,5 @@
+![Github Actions](https://github.com/HoolaBoola/ohtu-miniprojekti/workflows/Java%20CI%20with%20Gradle/badge.svg)
+
 # Projekti
 
 [Dokumentaatio](https://docs.google.com/document/d/1qWiSJlG732LREPr8bS2mVURYB_NPm3fy9u_7AJ8n1g0/edit?usp=sharing)
