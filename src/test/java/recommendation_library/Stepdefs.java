@@ -37,12 +37,13 @@ public class Stepdefs {
         inputLines.add("1");
     }
     
-    @When("book recommendation with author {string}, title {string}, description {string}, and isbn {string} is added")
-    public void addBookRecommendation(String author, String title, String description, String isbn) {
+    @When("book recommendation with author {string}, title {string}, description {string}, isbn {string} and page count {string} is added")
+    public void addBookRecommendation(String author, String title, String description, String isbn, String pageCount) {
         inputLines.add(author);
         inputLines.add(title);
         inputLines.add(description);
         inputLines.add(isbn);
+        inputLines.add(pageCount);
         io = new StubIO(inputLines);
         dao = new InMemoryRecommendationDao();
         ui = new UserInterface(io, dao);
@@ -59,8 +60,8 @@ public class Stepdefs {
         io.getPrints().contains(expectedOutput);
     }
     
-    @Then("app lists a recommendation with author {string}, title {string}, description {string}, and isbn {string}")
-    public void listingAddedRecommendation(String author, String title, String description, String isbn) {
+    @Then("app lists a recommendation with author {string}, title {string}, description {string}, isbn {string}, and page count {string}")
+    public void listingAddedRecommendation(String author, String title, String description, String isbn, String pageCount) {
         String addDate = java.time.LocalDate.now().toString();
         
         io.getPrints().contains("Recommendation 1" + System.lineSeparator() +
@@ -68,6 +69,7 @@ public class Stepdefs {
                     "Title: " + title + System.lineSeparator() +
                     "Description: " + description + System.lineSeparator() +
                     "ISBN: " + isbn + System.lineSeparator() +
+                    "Page count: " + pageCount + System.lineSeparator() +
                     "Added: " + addDate);
     }    
 }

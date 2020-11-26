@@ -32,8 +32,8 @@ public class DatabaseService {
         return false;
     }
 
-    public boolean addBook(String author, String title, String description, String isbn) {
-        dao.createBookRecommendation(author, title, description, isbn);
+    public boolean addBook(String author, String title, String description, String isbn, int pageCount) {
+        dao.createBookRecommendation(author, title, description, isbn, pageCount);
         return true;
     }
 

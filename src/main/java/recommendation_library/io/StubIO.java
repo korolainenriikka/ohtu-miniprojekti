@@ -39,4 +39,5 @@ public class StubIO implements IO{
     public void print(String string) {
         this.prints.add(string);
     }
+
 }

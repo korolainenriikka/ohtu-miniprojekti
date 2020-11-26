@@ -78,13 +78,20 @@ public class UserInterface {
         
         this.io.print("Type the ISBN of the book recommendation");
         String isbn = io.nextLine();
-
-        if (service.addBook(author, title, description, isbn)) {
-            this.io.print("Recommendation added");
-        }
-        else {
-            this.io.print("Addition failed");
         
+        this.io.print("Type the page count of the book recommendation");
+        String pageCount = io.nextLine();
+
+        try {
+            int pageCountInt = Integer.parseInt(pageCount);
+            if (service.addBook(author, title, description, isbn, pageCountInt)) {
+                this.io.print("Recommendation added");
+            }
+            else {
+                this.io.print("Addition failed");
+            }
+        } catch (Exception e) {
+            this.io.print("Given page count is not an integer!");
         }
     }
 
@@ -100,6 +107,7 @@ public class UserInterface {
                     + "Title: " + r.getTitle() + System.lineSeparator()
                     + "Description: " + r.getDescription() + System.lineSeparator()
                     + "ISBN: " + r.getIsbn() + System.lineSeparator()
+                    + "Page count: " + r.getPageCount() + System.lineSeparator()
                     + "Added: " + r.getAddDate());
         }
     }

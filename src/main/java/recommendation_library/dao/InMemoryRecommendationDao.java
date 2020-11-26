@@ -26,9 +26,9 @@ public class InMemoryRecommendationDao implements RecommendationDao {
     }
 
     @Override
-    public void createBookRecommendation(String author, String title, String description, String isbn) {
+    public void createBookRecommendation(String author, String title, String description, String isbn, int pageCount) {
         String addDate = java.time.LocalDate.now().toString();
-        this.bookRecommendations.add(new BookRecommendation(author, title, description, isbn, addDate));
+        this.bookRecommendations.add(new BookRecommendation(author, title, description, isbn, pageCount, addDate));
     }
 
     @Override

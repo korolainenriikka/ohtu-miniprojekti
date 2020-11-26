@@ -33,7 +33,6 @@ public class KonsoliIO implements IO{
     public void print(String string) {
         System.out.println(string);
     }
-    
-    
+        
     
 }

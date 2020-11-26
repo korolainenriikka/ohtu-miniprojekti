@@ -46,10 +46,11 @@ public class DatabasaRecommendationDaoTest {
             .thenReturn("Jane")
             .thenReturn("Hobitti")
             .thenReturn("Sci-fi thriller")
-            .thenReturn("1234-ABCD");
+            .thenReturn("1234-ABCD")
+            .thenReturn("10");
                 
         ui.addBook();
-        verify(io, times(4)).nextLine();
+        verify(io, times(5)).nextLine();
         assertFalse(service.getAllBookRecommendations().isEmpty());
     }
 

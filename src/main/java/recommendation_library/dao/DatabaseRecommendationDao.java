@@ -48,6 +48,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
                 + " title TEXT NOT NULL UNIQUE,\n"
                 + " description TEXT,\n"
                 + " isbn TEXT,\n"
+                + " pageCount integer,\n"
                 + " created TEXT"
                 + ");";
         try {
@@ -69,9 +70,9 @@ public class DatabaseRecommendationDao implements RecommendationDao {
      * @param isbn
      */
     @Override
-    public void createBookRecommendation(String author, String title, String description, String isbn) {
-        String sql = "INSERT INTO books(author, title, description, isbn, created) "
-                + "VALUES(?,?,?,?,?)";
+    public void createBookRecommendation(String author, String title, String description, String isbn, int pageCount) {
+        String sql = "INSERT INTO books(author, title, description, isbn, pageCount, created) "
+                + "VALUES(?,?,?,?,?,?)";
         try {
             Connection conn = this.connect();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -79,7 +80,8 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             statement.setString(2, title);
             statement.setString(3, description);
             statement.setString(4, isbn);
-            statement.setString(5, java.time.LocalDate.now().toString());
+            statement.setInt(5, pageCount);
+            statement.setString(6, java.time.LocalDate.now().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -100,7 +102,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             while (result.next()) {
                 books.add(new BookRecommendation(result.getString("author"),
                         result.getString("title"), result.getString("description"),
-                        result.getString("isbn"), result.getString("created")));
+                        result.getString("isbn"), result.getInt("pageCount"), result.getString("created")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -14,11 +14,21 @@ public class BookRecommendation extends Recommendation {
     
     String author;
     String isbn;
+    int pageCount;
 
-    public BookRecommendation(String author, String title, String description, String isbn, String addDate) {
+    public BookRecommendation(String author, String title, String description, String isbn, int pageCount, String addDate) {
         super(title, Type.BOOK, description, addDate);
         this.author = author;
         this.isbn = isbn;
+        this.pageCount = pageCount;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 
     public String getAuthor() {
