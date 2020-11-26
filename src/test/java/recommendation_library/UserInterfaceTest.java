@@ -51,7 +51,7 @@ public class UserInterfaceTest {
 
 
         verify(input, times(4)).nextLine();
-//        verify(service, times(1)).addBook("Jane", "Hobitti", "Sci-fi thriller", "1234-ABCD");
+        verify(test_dao, times(1)).createBookRecommendation("Jane", "Hobitti", "Sci-fi thriller", "1234-ABCD");
         verify(input, times(5)).print(anyString());
 
     }

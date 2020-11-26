@@ -5,7 +5,6 @@
  */
 package recommendation_library.domain;
 
-import java.util.Date;
 
 /**
  *

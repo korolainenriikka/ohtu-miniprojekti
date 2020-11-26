@@ -51,7 +51,6 @@ public class DatabaseRecommendationDao implements RecommendationDao {
                 + " created TEXT"
                 + ");";
         try {
-
             Connection connection = connect();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
@@ -67,13 +66,12 @@ public class DatabaseRecommendationDao implements RecommendationDao {
      * @param author
      * @param title
      * @param description
-     * @Param isbn
+     * @param isbn
      */
     @Override
     public void createBookRecommendation(String author, String title, String description, String isbn) {
         String sql = "INSERT INTO books(author, title, description, isbn, created) "
                 + "VALUES(?,?,?,?,?)";
-
         try {
             Connection conn = this.connect();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -114,7 +112,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
     public void editBookRecommendation(String title, String fieldToBeEdited, String newValue) {
         String sql = "UPDATE books SET " + fieldToBeEdited + " = ? WHERE title = ?" ;
         // make sql query;
-          try (Connection conn = this.connect();
+        try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the corresponding param

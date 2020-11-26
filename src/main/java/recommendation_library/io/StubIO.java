@@ -32,7 +32,7 @@ public class StubIO implements IO{
         if (i < lines.size()) {
             return lines.get(i++);
         }
-        return "";
+        return "3";
     }
 
     @Override

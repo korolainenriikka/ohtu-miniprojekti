@@ -38,10 +38,10 @@ public class UserInterface {
             checkInput(input);
         }
         // Personal test of service.editBookRecommendation method
-        service.addBook("Bob", "name", "good", "12345");
-        list();
-        service.editBookRecommendation("name", "title", "a better title");
-        list();
+//        service.addBook("Bob", "name", "good", "12345");
+//        list();
+//        service.editBookRecommendation("name", "title", "a better title");
+//        list();
     }
 
     /**
@@ -95,9 +95,12 @@ public class UserInterface {
         List<BookRecommendation> list = service.getAllBookRecommendations();
         int i = 1;
         for (BookRecommendation r : list) {
-            this.io.print(i++ + ":   " + r.getAuthor()
-                    + ", " + r.getTitle() + ": " + r.getDescription() + " ISBN: "
-                            + r.getIsbn() + " added: " + r.getAddDate());
+            this.io.print("Recommendation " + i++ + System.lineSeparator()
+                    + "Author: " + r.getAuthor() + System.lineSeparator()
+                    + "Title: " + r.getTitle() + System.lineSeparator()
+                    + "Description: " + r.getDescription() + System.lineSeparator()
+                    + "ISBN: " + r.getIsbn() + System.lineSeparator()
+                    + "Added: " + r.getAddDate());
         }
     }
 
