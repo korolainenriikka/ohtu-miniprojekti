@@ -11,13 +11,13 @@ import java.util.Date;
  *
  * @author anadis
  */
-public class BookRecommendation extends Recommendation{
+public class BookRecommendation extends Recommendation {
     
     String author;
     String isbn;
 
-    public BookRecommendation(String author, String title, String type, String description, String isbn, String addDate) {
-        super(title, type, description, addDate);
+    public BookRecommendation(String author, String title, String description, String isbn, String addDate) {
+        super(title, Type.BOOK, description, addDate);
         this.author = author;
         this.isbn = isbn;
     }

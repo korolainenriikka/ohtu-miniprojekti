@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class Recommendation {
     protected String title;
-    protected String type;
+    protected Type type;
     protected String description;
     protected String addDate;
     
-    public Recommendation(String title, String type, String description, String addDate) {
+    public Recommendation(String title, Type type, String description, String addDate) {
         this.title = title;
         this.type = type;
         this.description = description;
@@ -33,11 +33,11 @@ public class Recommendation {
         this.title = title;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -56,7 +56,10 @@ public class Recommendation {
     public void setAddDate(String addDate) {
         this.addDate = addDate;
     }
-    
+
+    public boolean equals(Recommendation other) {
+        return this.title.equals(other.getTitle());
+    }
     
     
 }

@@ -9,6 +9,7 @@ import recommendation_library.domain.BookRecommendation;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import recommendation_library.domain.Type;
 
 /**
  *
@@ -18,11 +19,10 @@ public class DatabaseRecommendationDao implements RecommendationDao {
 
     private String fileName;
 
-
     public DatabaseRecommendationDao(String filename) {
         this.fileName = filename;
         connect();
-        createTable();
+        createBookTable();
     }
 
     private Connection connect() {
@@ -33,7 +33,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             connection = DriverManager.getConnection(url);
             if (connection != null) {
                 DatabaseMetaData meta = connection.getMetaData();
-//                System.out.println("The driver name is " + meta.getDriverName());  
+                System.out.println("The driver name is " + meta.getDriverName());  
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -41,75 +41,73 @@ public class DatabaseRecommendationDao implements RecommendationDao {
         return connection;
     }
 
-    public void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS recommendations (\n"
+    public void createBookTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS books (\n"
                 + " id integer PRIMARY KEY,\n"
-                + " author text NOT NULL,\n"
-                + " title text NOT NULL,\n"
-                + " description text"
+                + " author TEXT NOT NULL,\n"
+                + " title TEXT NOT NULL UNIQUE,\n"
+                + " description TEXT,\n"
+                + " isbn TEXT,\n"
+                + " created TEXT"
                 + ");";
         try {
 
-            Connection conn = connect();
-            Statement stmt = conn.createStatement();
+            Connection connection = connect();
+            Statement stmt = connection.createStatement();
             stmt.execute(sql);
+            System.out.println("table created");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-//    /**
-//     * Insert a new recommendation into the database
-//     * @param author
-//     * @param title
-//     * @param descr
-//     */
-//    @Override
-//    public void createRecommendation(String author, String title, String descr) {
-//        String sql = "INSERT INTO recommendations(author, title, description) "
-//                + "VALUES(?,?,?)";
-//
-//        try {
-//            Connection conn = this.connect();
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1, author);
-//            pstmt.setString(2, title);
-//            pstmt.setString(3, descr);
-//            pstmt.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    /**
-//     * Fetch every recommendation from attached database
-//     * @return List of recommendations
-//     */
-//    @Override
-//    public List<BookRecommendation> getAll() {
-//        ArrayList<BookRecommendation> recommendations = new ArrayList<>();
-//        try {
-//            Connection conn = this.connect();
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM recommendations");
-//            while (rs.next()) {  
-//                recommendations.add(new BookRecommendation(rs.getString("author"), 
-//                        rs.getString("title"), rs.getString("description")));  
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return recommendations;
-//    }
-
+    /**
+     * Insert a new recommendation into the database
+     *
+     * @param author
+     * @param title
+     * @param description
+     * @Param isbn
+     */
     @Override
-    public void createBookRecommendation(String author, String title, String type, String description, String isbn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createBookRecommendation(String author, String title, String description, String isbn) {
+        String sql = "INSERT INTO books(author, title, description, isbn, created) "
+                + "VALUES(?,?,?,?,?)";
+
+        try {
+            Connection conn = this.connect();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, author);
+            statement.setString(2, title);
+            statement.setString(3, description);
+            statement.setString(4, isbn);
+            statement.setString(5, java.time.LocalDate.now().toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
+    /**
+     * Fetch every recommendation from attached database
+     * @return List of recommendations
+     */
     @Override
     public List<BookRecommendation> getAllBookRecommendations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<BookRecommendation> books = new ArrayList<>();
+        try {
+            Connection connection = this.connect();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM books");
+            while (result.next()) {
+                books.add(new BookRecommendation(result.getString("author"),
+                        result.getString("title"), result.getString("description"),
+                        result.getString("isbn"), result.getString("created")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return books;
     }
 
 }

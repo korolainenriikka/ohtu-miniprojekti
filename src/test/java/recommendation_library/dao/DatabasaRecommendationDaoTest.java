@@ -6,16 +6,13 @@
 package recommendation_library.dao;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import recommendation_library.UserInterface;
-import recommendation_library.domain.BookRecommendation;
+import recommendation_library.domain.DatabaseService;
 import recommendation_library.io.IO;
-import recommendation_library.io.KonsoliIO;
 
 /**
  *
@@ -26,6 +23,7 @@ public class DatabasaRecommendationDaoTest {
     IO io;
     UserInterface ui;
     RecommendationDao db_dao;
+    DatabaseService service;
 
     public DatabasaRecommendationDaoTest() {
     }
@@ -33,6 +31,7 @@ public class DatabasaRecommendationDaoTest {
     @Before
     public void setUp() {
         db_dao = new DatabaseRecommendationDao("src/test/resources/test.db");
+        service = new DatabaseService(db_dao);
         io = mock(IO.class);
         ui = new UserInterface(io, db_dao);
     }
@@ -46,13 +45,12 @@ public class DatabasaRecommendationDaoTest {
         when(io.nextLine())
             .thenReturn("Jane")
             .thenReturn("Hobitti")
-            .thenReturn("Book")
             .thenReturn("Sci-fi thriller")
             .thenReturn("1234-ABCD");
                 
         ui.addBook();
-        verify(io, times(5)).nextLine();
-        assertFalse(db_dao.getAllBookRecommendations().isEmpty());
+        verify(io, times(4)).nextLine();
+        assertFalse(service.getAllBookRecommendations().isEmpty());
     }
 
 }

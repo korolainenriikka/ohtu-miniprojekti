@@ -21,19 +21,22 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import recommendation_library.dao.RecommendationDao;
+import recommendation_library.domain.DatabaseService;
 import recommendation_library.io.IO;
 
 public class UserInterfaceTest {
 
     UserInterface UI;
     IO input;
-    RecommendationDao Dao;
+    DatabaseService service;
+    RecommendationDao test_dao;
 
     @Before
     public void setUp() {
         input = mock(IO.class);
-        Dao = mock(RecommendationDao.class);
-        UI = new UserInterface(input, Dao);
+        test_dao = mock(RecommendationDao.class);
+        service = mock(DatabaseService.class);
+        UI = new UserInterface(input, test_dao);
     }
 
     @Test
@@ -41,16 +44,15 @@ public class UserInterfaceTest {
         when(input.nextLine())
             .thenReturn("Jane")
             .thenReturn("Hobitti")
-            .thenReturn("Book")
             .thenReturn("Sci-fi thriller")
             .thenReturn("1234-ABCD");
 
         UI.checkInput(1);
 
 
-        verify(input, times(5)).nextLine();
-        verify(Dao, times(1)).createBookRecommendation("Jane", "Hobitti", "Book", "Sci-fi thriller", "1234-ABCD");
-        verify(input, times(4)).print(anyString());
+        verify(input, times(4)).nextLine();
+//        verify(service, times(1)).addBook("Jane", "Hobitti", "Sci-fi thriller", "1234-ABCD");
+        verify(input, times(5)).print(anyString());
 
     }
 

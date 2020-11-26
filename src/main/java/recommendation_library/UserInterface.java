@@ -9,6 +9,7 @@ import recommendation_library.io.IO;
 import recommendation_library.dao.RecommendationDao;
 import recommendation_library.domain.BookRecommendation;
 import java.util.List;
+import recommendation_library.domain.DatabaseService;
 
 /**
  *
@@ -17,11 +18,11 @@ import java.util.List;
 public class UserInterface {
 
     private IO io;
-    private RecommendationDao dbDao;
+    private DatabaseService service;
 
     public UserInterface(IO io, RecommendationDao dao) {
         this.io = io;
-        this.dbDao = dao;
+        this.service = new DatabaseService(dao);
     }
 
     /**
@@ -57,34 +58,41 @@ public class UserInterface {
      */
     public void addBook() {
         
-        this.io.print("Type the author of the recommendation");
+        this.io.print("Type the author of the book recommendation");
         String author = io.nextLine();
         
-        this.io.print("Type the title of the recommendation");
+        this.io.print("Type the title of the book recommendation");
         String title = io.nextLine();
+        if (service.titleAlreadyExists(title)) {
+            System.out.println("Title already exists");
+            // Do some logic here
+        }
 
-        this.io.print("Type the type of the recommendation");
-        String type = io.nextLine();
-
-        this.io.print("Type the description of the recommendation");
+        this.io.print("Type the description of the book recommendation");
         String description = io.nextLine();
         
-        this.io.print("Type the ISBN of the recommendation");
+        this.io.print("Type the ISBN of the book recommendation");
         String isbn = io.nextLine();
 
-        dbDao.createBookRecommendation(author, title, type, description, isbn);
-        this.io.print("Recommendation added");
+        if (service.addBook(author, title, description, isbn)) {
+            this.io.print("Recommendation added");
+        }
+        else {
+            this.io.print("Addition failed");
+        
+        }
     }
 
     /**
      * list all book recommendations contained within the library
      */
     public void list() {
-        List<BookRecommendation> list = dbDao.getAllBookRecommendations();
+        List<BookRecommendation> list = service.getAllBookRecommendations();
         int i = 1;
         for (BookRecommendation r : list) {
             this.io.print(i++ + ":   " + r.getAuthor()
-                    + ", " + r.getTitle() + ": " + r.getDescription());
+                    + ", " + r.getTitle() + ": " + r.getDescription() + " ISBN: "
+                            + r.getIsbn() + " added: " + r.getAddDate());
         }
     }
 

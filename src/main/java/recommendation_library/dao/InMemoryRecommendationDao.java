@@ -9,6 +9,7 @@ import recommendation_library.domain.BookRecommendation;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import recommendation_library.domain.Type;
 
 /**
  *
@@ -25,14 +26,16 @@ public class InMemoryRecommendationDao implements RecommendationDao {
     }
 
     @Override
-    public void createBookRecommendation(String author, String title, String type, String description, String isbn) {
+    public void createBookRecommendation(String author, String title, String description, String isbn) {
         String addDate = java.time.LocalDate.now().toString();
-        this.bookRecommendations.add(new BookRecommendation(author, title, type, description, isbn, addDate));
+        this.bookRecommendations.add(new BookRecommendation(author, title, description, isbn, addDate));
     }
 
     @Override
     public List<BookRecommendation> getAllBookRecommendations() {
         return this.bookRecommendations;
     }
+
+
 
 }

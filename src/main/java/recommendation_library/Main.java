@@ -7,11 +7,9 @@ package recommendation_library;
 
 import recommendation_library.io.KonsoliIO;
 import recommendation_library.dao.DatabaseRecommendationDao;
-import recommendation_library.dao.RecommendationDao;
-import recommendation_library.domain.BookRecommendation;
-import recommendation_library.UserInterface;
 
 import java.util.Scanner;
+import recommendation_library.dao.RecommendationDao;
 
 /**
  *
@@ -24,8 +22,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here        
-        
-        UserInterface UI = new UserInterface(new KonsoliIO(new Scanner(System.in)), new DatabaseRecommendationDao("recommendations.db"));
+        RecommendationDao dao = new DatabaseRecommendationDao("recommendations.db");
+        UserInterface UI = new UserInterface(new KonsoliIO(new Scanner(System.in)), dao);
         
         UI.run();
     }
