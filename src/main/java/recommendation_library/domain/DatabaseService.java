@@ -33,6 +33,9 @@ public class DatabaseService {
     }
 
     public boolean addBook(String author, String title, String description, String isbn, int pageCount) {
+        if (titleAlreadyExists(title)) {
+            return false;
+        }
         dao.createBookRecommendation(author, title, description, isbn, pageCount);
         return true;
     }

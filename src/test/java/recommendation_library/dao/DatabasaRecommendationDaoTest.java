@@ -5,15 +5,10 @@
  */
 package recommendation_library.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 import static org.mockito.Mockito.*;
 import recommendation_library.UserInterface;
 import recommendation_library.domain.BookRecommendation;
@@ -40,7 +35,7 @@ public class DatabasaRecommendationDaoTest {
         service = new DatabaseService(db_dao);
         io = mock(IO.class);
         ui = new UserInterface(io, db_dao);
-        
+
         List<BookRecommendation> books = db_dao.getAllBookRecommendations();
         for (BookRecommendation b : books) {
             db_dao.deleteBookByTitle(b.getTitle());
@@ -77,7 +72,7 @@ public class DatabasaRecommendationDaoTest {
         BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(0);
         assertEquals("John", addedRecommendation.getAuthor());
     }
-    
+
     @Test
     public void editBookRecommendationEditsTitle() {
         service.addBook("Bob", "book2", "good", "abc", 10);
@@ -93,13 +88,24 @@ public class DatabasaRecommendationDaoTest {
         BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(0);
         assertEquals("cba", addedRecommendation.getIsbn());
     }
-    
+
     @Test
     public void deletesRecommencation() {
         int count = service.getAllBookRecommendations().size();
+        System.out.println(count);
         service.addBook("Bob", "book4", "good", "abc", 10);
-        assertEquals(count+1, service.getAllBookRecommendations().size());
+        assertEquals(count + 1, service.getAllBookRecommendations().size());
         service.deleteRecommendation("book4");
+        assertEquals(count, service.getAllBookRecommendations().size());
+    }
+
+    @Test
+    public void existingTitleNotReaddedToDatabase() {
+        service.addBook("Bob", "book4", "good", "abc", 10);
+        assertTrue(service.titleAlreadyExists("book4"));
+        int count = service.getAllBookRecommendations().size();
+        boolean added = service.addBook("Henri", "book4", "different book same title", "asd", 11);
+        assertFalse(added);
         assertEquals(count, service.getAllBookRecommendations().size());
     }
 }
