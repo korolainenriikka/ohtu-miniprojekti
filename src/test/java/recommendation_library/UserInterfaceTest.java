@@ -9,6 +9,10 @@ package recommendation_library;
  * @author jhku
  */
 
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,10 +23,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import recommendation_library.dao.DatabaseRecommendationDao;
 
 import recommendation_library.dao.RecommendationDao;
+import recommendation_library.domain.BookRecommendation;
 import recommendation_library.domain.DatabaseService;
 import recommendation_library.io.IO;
+import recommendation_library.io.StubIO;
 
 public class UserInterfaceTest {
 
@@ -30,6 +37,10 @@ public class UserInterfaceTest {
     IO input;
     DatabaseService service;
     RecommendationDao test_dao;
+    RecommendationDao db_dao;
+    DatabaseService db_service;
+    StubIO db_io;
+    UserInterface db_ui;
 
     @Before
     public void setUp() {
@@ -37,6 +48,14 @@ public class UserInterfaceTest {
         test_dao = mock(RecommendationDao.class);
         service = mock(DatabaseService.class);
         UI = new UserInterface(input, test_dao);
+        
+        db_dao = new DatabaseRecommendationDao("src/test/resources/test.db");
+        db_service = new DatabaseService(db_dao);
+        
+        List<BookRecommendation> books = db_dao.getAllBookRecommendations();
+        for (BookRecommendation b : books) {
+            db_dao.deleteBookByTitle(b.getTitle());
+        }
     }
 
     @Test
@@ -70,6 +89,31 @@ public class UserInterfaceTest {
         UI.checkInput(2);
 
         verify(test_dao, times(1)).getAllBookRecommendations();
+    }
+    
+    @Test
+    public void listingRecommendationsReturnsList() {
+        List<String> inputLines = new ArrayList<>();
+        inputLines.add("1");
+        inputLines.add("Jeff VanderMeer");
+        inputLines.add("Annihilation");
+        inputLines.add("Good book");
+        inputLines.add("ABCD");
+        inputLines.add("777");
+        inputLines.add("2");
+        
+        db_io = new StubIO(inputLines);
+        db_ui = new UserInterface(db_io, db_dao);
+        db_ui.run();
+
+        assertTrue(db_io.getPrints().contains("Recommendation 1" + System.lineSeparator()
+                        + "Author: Jeff VanderMeer" + System.lineSeparator()
+                        + "Title: Annihilation" + System.lineSeparator()
+                        + "Description: Good book" + System.lineSeparator()
+                        + "ISBN: ABCD" + System.lineSeparator()
+                        + "Page count: 777" + System.lineSeparator()
+                        + "Added: " + java.time.LocalDate.now().toString()));
+
 
     }
 

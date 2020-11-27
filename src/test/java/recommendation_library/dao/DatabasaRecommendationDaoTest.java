@@ -5,10 +5,15 @@
  */
 package recommendation_library.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import static org.mockito.Mockito.*;
 import recommendation_library.UserInterface;
 import recommendation_library.domain.BookRecommendation;
@@ -35,10 +40,11 @@ public class DatabasaRecommendationDaoTest {
         service = new DatabaseService(db_dao);
         io = mock(IO.class);
         ui = new UserInterface(io, db_dao);
-    }
-
-    @After
-    public void tearDown() {
+        
+        List<BookRecommendation> books = db_dao.getAllBookRecommendations();
+        for (BookRecommendation b : books) {
+            db_dao.deleteBookByTitle(b.getTitle());
+        }
     }
 
     @Test
@@ -68,7 +74,7 @@ public class DatabasaRecommendationDaoTest {
     public void editBookRecommendationEditsAuthor() {
         service.addBook("Bob", "book", "good", "abc", 10);
         service.editBookRecommendation("book", "author", "John");
-        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(1);
+        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(0);
         assertEquals("John", addedRecommendation.getAuthor());
     }
     
@@ -76,15 +82,15 @@ public class DatabasaRecommendationDaoTest {
     public void editBookRecommendationEditsTitle() {
         service.addBook("Bob", "book2", "good", "abc", 10);
         service.editBookRecommendation("book2", "title", "a better title");
-        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(2);
+        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(0);
         assertEquals("a better title", addedRecommendation.getTitle());
     }
 
     @Test
     public void editBookRecommendationEditsISBN() {
         service.addBook("Bob", "book3", "good", "abc", 10);
-        service.editBookRecommendation("book2", "isbn", "cba");
-        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(3);
+        service.editBookRecommendation("book3", "isbn", "cba");
+        BookRecommendation addedRecommendation = service.getAllBookRecommendations().get(0);
         assertEquals("cba", addedRecommendation.getIsbn());
     }
     
