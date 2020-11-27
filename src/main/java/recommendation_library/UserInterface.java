@@ -5,6 +5,8 @@
  */
 package recommendation_library;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import recommendation_library.io.IO;
 import recommendation_library.dao.RecommendationDao;
 import recommendation_library.domain.BookRecommendation;
@@ -30,9 +32,9 @@ public class UserInterface {
      */
     public void run() {
         while (true) {
-            this.io.print("[1] Add recommendation, [2] List recommendations, [3] Exit");
+            this.io.print("[1] Add recommendation, [2] List recommendations, [3] Edit recommendation, [4] Exit");
             int input = Integer.valueOf(io.nextLine());
-            if (input == 3) {
+            if (input == 4) {
                 break;
             }
             checkInput(input);
@@ -46,14 +48,17 @@ public class UserInterface {
 
     /**
      * 
-     * @param input number given from user. 1 for "add", 2 for "list", 3 for "exit"
+     * @param input number given from user. 1 for "add", 2 for "list", 3 for "edit", 4 for "exit"
      */
     public void checkInput(int input) {
         if (input == 1) {
             addBook();
         } else if (input == 2) {
             list();
-        } else {
+        } else if (input == 3) {
+            edit();
+        }
+        else {
             this.io.print("Unknown command");
         }
     }
@@ -110,6 +115,60 @@ public class UserInterface {
                     + "Page count: " + r.getPageCount() + System.lineSeparator()
                     + "Added: " + r.getAddDate());
         }
+    }
+    
+    /**
+     * list titles of all book recommendations contained within the library
+     */
+    public List<String> listTitles() {
+        List<BookRecommendation> recommendationList = service.getAllBookRecommendations();
+        List<String> titleList = new ArrayList<>();
+        for (BookRecommendation r : recommendationList) {
+            titleList.add(r.getTitle());
+        }
+        return titleList;
+    }
+    
+    /**
+     * edit a book recommendation
+     * TODO: pagecount is integer, so now this can only edit string fields
+     * -> should we change the field "pagecount" into String in database to ease the job?
+     * TODO: should offer an option to exit if given title or fieldname doesn't exist, and perhaps an option to list recommendations(?)
+     */
+    public void edit(){
+        List<String> stringFieldNames = Arrays.asList("author", "title", "description", "isbn");
+        
+        this.io.print("Enter the title of the recommendation you wish to edit:\nTitles in your library:");  
+        List<String> allTitles = listTitles();
+        for(String title : allTitles) {
+            this.io.print(title);
+        };      
+        String titleToEdit = String.valueOf(io.nextLine());
+                
+        if(this.service.titleAlreadyExists(titleToEdit)) {            
+            this.io.print("Enter the fieldname of the selected recommendation you wish to edit (author, title, description, isbn, pagecount):");
+            String fieldToEdit = String.valueOf(io.nextLine());
+            
+            while(!stringFieldNames.contains(fieldToEdit)){                
+                this.io.print("Given fieldname doesn't exist! Enter a valid fieldname (author, title, description, isbn, pagecount):");
+                fieldToEdit = String.valueOf(io.nextLine());
+            }
+            
+            this.io.print("Enter a new value to insert into the selected field:");
+            String newValue = String.valueOf(io.nextLine());
+            
+            try {
+                this.service.editBookRecommendation(titleToEdit, fieldToEdit, newValue);                
+            } catch (Exception e) {
+            this.io.print("Failed!");
+            }    
+            
+            this.io.print("Field "+ fieldToEdit + " succesfully changed to " + newValue + "!");
+            
+        } else {
+            this.io.print("Recommendation with the given title doesn't exist! Try again: ");
+            edit();
+        }                         
     }
 
 }
