@@ -33,7 +33,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             connection = DriverManager.getConnection(url);
             if (connection != null) {
                 DatabaseMetaData meta = connection.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());  
+//                System.out.println("The driver name is " + meta.getDriverName());  
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -55,7 +55,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             Connection connection = connect();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
-            System.out.println("table created");
+//            System.out.println("table created");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -120,6 +120,21 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             // set the corresponding param
             pstmt.setString(1, newValue);
             pstmt.setString(2, title);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    @Override
+    public void deleteBookByTitle(String title) {
+        String sql = "DELETE FROM books WHERE title = ?";
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, title);
             // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {

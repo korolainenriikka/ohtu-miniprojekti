@@ -45,4 +45,15 @@ public class DatabaseService {
     public void editBookRecommendation(String title, String fieldToChange, String newValue) {
         this.dao.editBookRecommendation(title, fieldToChange, newValue);
     }
+    
+    public boolean deleteRecommendation(String title) {
+        List<BookRecommendation> books = dao.getAllBookRecommendations();
+        for (BookRecommendation book : books) {
+            if (book.getTitle().equals(title)) {
+                dao.deleteBookByTitle(title);
+                return true;
+            }
+        }
+        return false;
+    }
 }
