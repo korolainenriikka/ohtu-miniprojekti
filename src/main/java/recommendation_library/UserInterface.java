@@ -32,9 +32,9 @@ public class UserInterface {
      */
     public void run() {
         while (true) {
-            this.io.print("[1] Add recommendation, [2] List recommendations, [3] Edit recommendation, [4] Exit");
+            this.io.print("[1] Add recommendation, [2] List recommendations, [3] Edit recommendation, [4] Delete recommendation, [5] Exit");
             int input = Integer.valueOf(io.nextLine());
-            if (input == 4) {
+            if (input == 5) {
                 break;
             }
             checkInput(input);
@@ -54,7 +54,9 @@ public class UserInterface {
         } else if (input == 3) {
             edit();
         }
-        else {
+        else if (input == 4) {
+            delete();
+        } else {
             this.io.print("Unknown command");
         }
     }
@@ -165,6 +167,23 @@ public class UserInterface {
             this.io.print("Recommendation with the given title doesn't exist! Try again: ");
             edit();
         }                         
+    }
+    
+    public void delete() {
+        this.io.print("Enter the title of the recommendation you wish to delete:\nTitles in your library:");  
+        List<String> allTitles = listTitles();
+        for(String title : allTitles) {
+            this.io.print(title);
+        };      
+        String titleToDelete = String.valueOf(io.nextLine());
+                
+
+        if (this.service.deleteRecommendation(titleToDelete)) {
+           this.io.print("Recommendation deleted!");                     
+        } else {
+            this.io.print("Recommendation with the given title doesn't exist! Try again: ");
+            run();
+        }                       
     }
 
 }

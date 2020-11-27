@@ -47,12 +47,9 @@ public class DatabaseService {
     }
     
     public boolean deleteRecommendation(String title) {
-        List<BookRecommendation> books = dao.getAllBookRecommendations();
-        for (BookRecommendation book : books) {
-            if (book.getTitle().equals(title)) {
-                dao.deleteBookByTitle(title);
-                return true;
-            }
+        if(titleAlreadyExists(title)) {
+            dao.deleteBookByTitle(title);
+            return true;
         }
         return false;
     }

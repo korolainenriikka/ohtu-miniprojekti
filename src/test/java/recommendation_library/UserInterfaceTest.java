@@ -79,7 +79,7 @@ public class UserInterfaceTest {
 
     @Test
     public void checkInputUnknownCommand() {
-        UI.checkInput(5);
+        UI.checkInput(999);
 
         verify(input, times(1)).print("Unknown command");
     }

@@ -43,7 +43,16 @@ public class InMemoryRecommendationDao implements RecommendationDao {
 
     @Override
     public void deleteBookByTitle(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        BookRecommendation toBeRemoved = null;
+        for (BookRecommendation b : bookRecommendations) {
+            if (b.getTitle().equals(title)) {
+                toBeRemoved = b;
+                break;
+            }
+        }
+        if (toBeRemoved != null) {
+            bookRecommendations.remove(toBeRemoved);
+        }
     }
 
 

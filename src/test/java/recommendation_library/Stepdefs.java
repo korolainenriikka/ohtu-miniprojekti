@@ -14,6 +14,9 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import recommendation_library.domain.BookRecommendation;
 
 
 /**
@@ -44,32 +47,76 @@ public class Stepdefs {
         inputLines.add(description);
         inputLines.add(isbn);
         inputLines.add(pageCount);
-        io = new StubIO(inputLines);
-        dao = new InMemoryRecommendationDao();
-        ui = new UserInterface(io, dao);
-        ui.run();
     }
     
     @When("^command list is selected")
     public void commandListSelected() {
         inputLines.add("2");
     }
+    
+    @When("command delete is selected")
+    public void commandDeleteSelected() {
+        inputLines.add("4");
+    }
+    
+    @When("book title {string} is entered")
+    public void bookTitleIsEntered(String title) {
+        inputLines.add(title);
+    }
 
     @Then("system will respond with {string}")
     public void systemWillRespondWith(String expectedOutput) {
-        io.getPrints().contains(expectedOutput);
+        io = new StubIO(inputLines);
+        dao = new InMemoryRecommendationDao();
+        ui = new UserInterface(io, dao);
+        ui.run();
+        assertTrue(io.getPrints().contains(expectedOutput));
     }
     
     @Then("app lists a recommendation with author {string}, title {string}, description {string}, isbn {string}, and page count {string}")
     public void listingAddedRecommendation(String author, String title, String description, String isbn, String pageCount) {
+        io = new StubIO(inputLines);
+        dao = new InMemoryRecommendationDao();
+        ui = new UserInterface(io, dao);
+        ui.run();
+        
         String addDate = java.time.LocalDate.now().toString();
         
-        io.getPrints().contains("Recommendation 1" + System.lineSeparator() +
+        assertTrue(io.getPrints().contains("Recommendation 1" + System.lineSeparator() +
                     "Author: " + author + System.lineSeparator() +
                     "Title: " + title + System.lineSeparator() +
                     "Description: " + description + System.lineSeparator() +
                     "ISBN: " + isbn + System.lineSeparator() +
                     "Page count: " + pageCount + System.lineSeparator() +
-                    "Added: " + addDate);
-    }    
+                    "Added: " + addDate));
+    }
+    
+    @Then("app deletes a recommendation with the title {string}")
+    public void deletingBookWorks(String deletedTitle) {
+        io = new StubIO(inputLines);
+        dao = new InMemoryRecommendationDao();
+        ui = new UserInterface(io, dao);
+        ui.run();
+        
+        assertTrue(io.getPrints().contains("Recommendation added"));
+        assertTrue(io.getPrints().contains("Recommendation deleted!"));
+        
+        for (BookRecommendation b : dao.getAllBookRecommendations()) {
+            assertFalse(b.getTitle().equals(deletedTitle));
+        }
+        
+        assertTrue(dao.getAllBookRecommendations().isEmpty());
+    }
+    
+    @Then("app doesn't delete a recommendation with the title {string}")
+    public void failingToDeleteWorks(String title) {
+        inputLines.add("5");
+        io = new StubIO(inputLines);
+        dao = new InMemoryRecommendationDao();
+        ui = new UserInterface(io, dao);
+        ui.run();
+        
+        assertTrue(io.getPrints().contains("Recommendation added"));
+        assertTrue(io.getPrints().contains("Recommendation with the given title doesn't exist! Try again: "));
+    }
 }
