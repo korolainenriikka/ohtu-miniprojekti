@@ -5,9 +5,7 @@
  */
 package recommendation_library.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import recommendation_library.dao.DatabaseRecommendationDao;
 import recommendation_library.dao.RecommendationDao;
 
 /**
@@ -44,13 +42,13 @@ public class DatabaseService {
         List<BookRecommendation> books = dao.getAllBookRecommendations();
         return books;
     }
-    
+
     public void editBookRecommendation(String title, String fieldToChange, String newValue) {
         this.dao.editBookRecommendation(title, fieldToChange, newValue);
     }
-    
+
     public boolean deleteRecommendation(String title) {
-        if(titleAlreadyExists(title)) {
+        if (titleAlreadyExists(title)) {
             dao.deleteBookByTitle(title);
             return true;
         }

@@ -9,7 +9,6 @@ import recommendation_library.domain.BookRecommendation;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import recommendation_library.domain.Type;
 
 /**
  *
@@ -90,6 +89,7 @@ public class DatabaseRecommendationDao implements RecommendationDao {
 
     /**
      * Fetch every recommendation from attached database
+     *
      * @return List of recommendations
      */
     @Override
@@ -109,13 +109,12 @@ public class DatabaseRecommendationDao implements RecommendationDao {
         }
         return books;
     }
-    
+
     @Override
     public void editBookRecommendation(String title, String fieldToBeEdited, String newValue) {
-        String sql = "UPDATE books SET " + fieldToBeEdited + " = ? WHERE title = ?" ;
+        String sql = "UPDATE books SET " + fieldToBeEdited + " = ? WHERE title = ?";
         // make sql query;
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = this.connect();  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the corresponding param
             pstmt.setString(1, newValue);
@@ -126,12 +125,11 @@ public class DatabaseRecommendationDao implements RecommendationDao {
             System.out.println(e.getMessage());
         }
     }
-    
+
     @Override
     public void deleteBookByTitle(String title) {
         String sql = "DELETE FROM books WHERE title = ?";
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = this.connect();  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the corresponding param
             pstmt.setString(1, title);

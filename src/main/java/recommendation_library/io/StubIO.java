@@ -12,8 +12,8 @@ import java.util.List;
  *
  * @author jenni.makinen
  */
+public class StubIO implements IO {
 
-public class StubIO implements IO{
     private List<String> lines;
     private int i;
     private List<String> prints;
@@ -26,7 +26,7 @@ public class StubIO implements IO{
     public List<String> getPrints() {
         return prints;
     }
-    
+
     @Override
     public String nextLine() {
         if (i < lines.size()) {

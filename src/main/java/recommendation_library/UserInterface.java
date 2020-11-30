@@ -43,8 +43,9 @@ public class UserInterface {
     }
 
     /**
-     * 
-     * @param input number given from user. 1 for "add", 2 for "list", 3 for "edit", 4 for "exit"
+     *
+     * @param input number given from user. 1 for "add", 2 for "list", 3 for
+     * "edit", 4 for "exit"
      */
     public void checkInput(int input) {
         if (input == 1) {
@@ -53,8 +54,7 @@ public class UserInterface {
             list();
         } else if (input == 3) {
             edit();
-        }
-        else if (input == 4) {
+        } else if (input == 4) {
             delete();
         } else {
             this.io.print("Unknown command");
@@ -65,10 +65,10 @@ public class UserInterface {
      * add a book recommendation to the library
      */
     public void addBook() {
-        
+
         this.io.print("Type the author of the book recommendation");
         String author = io.nextLine();
-        
+
         this.io.print("Type the title of the book recommendation");
         String title = io.nextLine();
         if (service.titleAlreadyExists(title)) {
@@ -78,10 +78,10 @@ public class UserInterface {
 
         this.io.print("Type the description of the book recommendation");
         String description = io.nextLine();
-        
+
         this.io.print("Type the ISBN of the book recommendation");
         String isbn = io.nextLine();
-        
+
         this.io.print("Type the page count of the book recommendation");
         String pageCount = io.nextLine();
 
@@ -89,8 +89,7 @@ public class UserInterface {
             int pageCountInt = Integer.parseInt(pageCount);
             if (service.addBook(author, title, description, isbn, pageCountInt)) {
                 this.io.print("Recommendation added");
-            }
-            else {
+            } else {
                 this.io.print("Addition failed");
             }
         } catch (Exception e) {
@@ -114,7 +113,7 @@ public class UserInterface {
                     + "Added: " + r.getAddDate());
         }
     }
-    
+
     /**
      * list titles of all book recommendations contained within the library
      */
@@ -126,64 +125,64 @@ public class UserInterface {
         }
         return titleList;
     }
-    
+
     /**
-     * edit a book recommendation
-     * TODO: pagecount is integer, so now this can only edit string fields
-     * -> should we change the field "pagecount" into String in database to ease the job?
-     * TODO: should offer an option to exit if given title or fieldname doesn't exist, and perhaps an option to list recommendations(?)
+     * edit a book recommendation TODO: pagecount is integer, so now this can
+     * only edit string fields -> should we change the field "pagecount" into
+     * String in database to ease the job? TODO: should offer an option to exit
+     * if given title or fieldname doesn't exist, and perhaps an option to list
+     * recommendations(?)
      */
-    public void edit(){
+    public void edit() {
         List<String> stringFieldNames = Arrays.asList("author", "title", "description", "isbn");
-        
-        this.io.print("Enter the title of the recommendation you wish to edit:\nTitles in your library:");  
+
+        this.io.print("Enter the title of the recommendation you wish to edit:\nTitles in your library:");
         List<String> allTitles = listTitles();
-        for(String title : allTitles) {
+        for (String title : allTitles) {
             this.io.print(title);
-        };      
+        };
         String titleToEdit = String.valueOf(io.nextLine());
-                
-        if(this.service.titleAlreadyExists(titleToEdit)) {            
+
+        if (this.service.titleAlreadyExists(titleToEdit)) {
             this.io.print("Enter the fieldname of the selected recommendation you wish to edit (author, title, description, isbn, pagecount):");
             String fieldToEdit = String.valueOf(io.nextLine());
-            
-            while(!stringFieldNames.contains(fieldToEdit)){                
+
+            while (!stringFieldNames.contains(fieldToEdit)) {
                 this.io.print("Given fieldname doesn't exist! Enter a valid fieldname (author, title, description, isbn, pagecount):");
                 fieldToEdit = String.valueOf(io.nextLine());
             }
-            
+
             this.io.print("Enter a new value to insert into the selected field:");
             String newValue = String.valueOf(io.nextLine());
-            
+
             try {
-                this.service.editBookRecommendation(titleToEdit, fieldToEdit, newValue);                
+                this.service.editBookRecommendation(titleToEdit, fieldToEdit, newValue);
             } catch (Exception e) {
-            this.io.print("Failed!");
-            }    
-            
-            this.io.print("Field "+ fieldToEdit + " succesfully changed to " + newValue + "!");
-            
+                this.io.print("Failed!");
+            }
+
+            this.io.print("Field " + fieldToEdit + " succesfully changed to " + newValue + "!");
+
         } else {
             this.io.print("Recommendation with the given title doesn't exist! Try again: ");
             edit();
-        }                         
+        }
     }
-    
+
     public void delete() {
-        this.io.print("Enter the title of the recommendation you wish to delete:\nTitles in your library:");  
+        this.io.print("Enter the title of the recommendation you wish to delete:\nTitles in your library:");
         List<String> allTitles = listTitles();
-        for(String title : allTitles) {
+        for (String title : allTitles) {
             this.io.print(title);
-        };      
+        };
         String titleToDelete = String.valueOf(io.nextLine());
-                
 
         if (this.service.deleteRecommendation(titleToDelete)) {
-           this.io.print("Recommendation deleted!");                     
+            this.io.print("Recommendation deleted!");
         } else {
             this.io.print("Recommendation with the given title doesn't exist! Try again: ");
             run();
-        }                       
+        }
     }
 
 }

@@ -11,19 +11,20 @@ import java.util.Scanner;
  *
  * @author jenni.makinen
  */
-public class KonsoliIO implements IO{
+public class KonsoliIO implements IO {
 
     private Scanner reader;
 
     /**
-     * 
+     *
      * example: KonsoliIO io = new KonsoliIO(System.in);
+     *
      * @param scanner a scanner from where input can be read.
      */
     public KonsoliIO(Scanner scanner) {
-        reader = scanner;    
+        reader = scanner;
     }
-    
+
     @Override
     public String nextLine() {
         return reader.nextLine();
@@ -33,6 +34,5 @@ public class KonsoliIO implements IO{
     public void print(String string) {
         System.out.println(string);
     }
-        
-    
+
 }

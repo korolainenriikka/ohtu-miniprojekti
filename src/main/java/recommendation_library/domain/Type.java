@@ -10,7 +10,7 @@ package recommendation_library.domain;
  * @author anadis
  */
 public enum Type {
-    
+
     BOOK, VIDEO;
-    
+
 }

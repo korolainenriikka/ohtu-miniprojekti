@@ -5,17 +5,17 @@
  */
 package recommendation_library.domain;
 
-
 /**
  *
  * @author timot
  */
 public class Recommendation {
+
     protected String title;
     protected Type type;
     protected String description;
     protected String addDate;
-    
+
     public Recommendation(String title, Type type, String description, String addDate) {
         this.title = title;
         this.type = type;
@@ -58,6 +58,5 @@ public class Recommendation {
     public boolean equals(Recommendation other) {
         return this.title.equals(other.getTitle());
     }
-    
-    
+
 }
